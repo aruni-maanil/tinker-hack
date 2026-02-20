@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The XY Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<h1>🧬 The XY Analyzer</h1>
+
+<!-- Microphone recording -->
+<button class="mic-btn" onclick="startRecording()">🎙️ Record Audio</button>
+
+<!-- File upload -->
+<h3>OR Upload an audio file:</h3>
+<input type="file" id="audioFile" accept="audio/*">
+<button class="mic-btn" onclick="uploadAudio()">Upload</button>
+
+<h2 id="result">Speak or upload audio to analyze...</h2>
+
+<div class="chart-container">
+    <canvas id="chart"></canvas>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
