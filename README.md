@@ -2,10 +2,9 @@
   <img src="./img.png" alt="Project Banner" width="100%">
 </p>
 
-# [Project Name] 🎯
+The XY Analyzer 🎯
 
-## Basic Details
-
+Hackathon Project: Voice-Based Gender Tone Analyzer
 ### Team Name: [Name]
 
 ### Team Members
@@ -16,7 +15,7 @@
 [mention your project hosted link here]
 
 ### Project Description
-[2-3 lines about what your project does]
+The XY Analyzer is a web app that analyzes a user’s voice to determine whether it leans more feminine or masculine. It supports recording or uploading audio, converts it to text, analyzes it via Groq API, and displays the result in a dynamic glowing half-pie chart.
 
 ### The Problem statement
 [What problem are you solving?]
@@ -41,10 +40,12 @@
 ## Features
 
 List the key features of your project:
-- Feature 1: [Description]
-- Feature 2: [Description]
-- Feature 3: [Description]
-- Feature 4: [Description]
+- Feature 1: 🎤 Record audio from microphone
+- Feature 2: 📁 Upload audio files in multiple formats
+- Feature 3: 🔄 Automatic audio format conversion using FFmpeg + pydub
+- Feature 4: 🧬 Text analysis via Groq API
+- Feature 5: 📊 Half pie chart showing dominant feminine/masculine percentage
+- Feature 6: 🌟 Glowing, colorful dynamic visual feedback
 
 ---
 
@@ -54,21 +55,14 @@ List the key features of your project:
 
 #### Installation
 ```bash
-[Installation commands - e.g., npm install, pip install -r requirements.txt]
+git clone https://github.com/aruni-maanil/tinker-hack.git
+cd tinker-hack
 ```
 
 #### Run
 ```bash
-[Run commands - e.g., npm start, python app.py]
+py -m pip install flask groq python-dotenv SpeechRecognition pyaudio pydub
 ```
-
-### For Hardware:
-
-#### Components Required
-[List all components needed with specifications]
-
-#### Circuit Setup
-[Explain how to set up the circuit]
 
 ---
 
@@ -101,15 +95,7 @@ List the key features of your project:
 
 ---
 
-### For Hardware:
 
-#### Schematic & Circuit
-
-![Circuit](Add your circuit diagram here)
-*Add caption explaining connections*
-
-![Schematic](Add your schematic diagram here)
-*Add caption explaining the schematic*
 
 #### Build Photos
 
