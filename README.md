@@ -142,7 +142,10 @@ Frontend renders animated glowing half-pie chart
 ## Project Demo
 
 ### Video
-*Demo video coming soon*
+
+
+https://github.com/user-attachments/assets/e9931da9-7fc6-4e3f-86d1-c5ab602d2a62
+
 
 ### Live Site
 🔗 [https://tinker-hack.onrender.com/](https://tinker-hack.onrender.com/)
