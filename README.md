@@ -2,26 +2,26 @@
   <img src="./img.png" alt="Project Banner" width="100%">
 </p>
 
-The XY Analyzer 🎯
+# The XY Analyzer 🧬
 
-Hackathon Project: Voice-Based Gender Tone Analyzer
-### Team Name: [Name]
+## Basic Details
+
+### Team Name: Arunima Anil
 
 ### Team Members
-- Member 1: [Name] - [College]
-- Member 2: [Name] - [College]
+- Member 1: Arunima Anil - Viswajyothi College of Engineering
 
 ### Hosted Project Link
-[mention your project hosted link here]
+[https://tinker-hack.onrender.com/](https://tinker-hack.onrender.com/)
 
 ### Project Description
-The XY Analyzer is a web app that analyzes a user’s voice to determine whether it leans more feminine or masculine. It supports recording or uploading audio, converts it to text, analyzes it via Groq API, and displays the result in a dynamic glowing half-pie chart.
+The XY Analyzer is a web app that analyzes a user's voice to determine whether it leans more feminine or masculine. It supports recording or uploading audio, converts it to text using Groq's Whisper model, and displays the result in a dynamic glowing half-pie chart.
 
-### The Problem statement
-[What problem are you solving?]
+### The Problem Statement
+Human communication carries subtle tonal patterns that can be classified as more feminine or masculine in style — but there's no quick, accessible tool to visualize this in real time from voice input.
 
 ### The Solution
-[How are you solving it?]
+The XY Analyzer lets users record or upload audio directly in the browser. It transcribes the speech using Groq Whisper, analyzes the linguistic tone via a Groq LLM (LLaMA 3), and presents the feminine/masculine ratio visually through an animated glowing chart.
 
 ---
 
@@ -30,22 +30,20 @@ The XY Analyzer is a web app that analyzes a user’s voice to determine whether
 ### Technologies/Components Used
 
 **For Software:**
-- Languages used: Python, HTML, CSS ,JavaScript
-- Frameworks used: Flask ,Jinja2
--  Libraries used: speech_recognition, pydub, groq, python-dotenv, pyaudio, io, json, Chart.js, Fetch API
-- Tools used: VS Code, Browser, FFmpeg, Command Prompt, pip, Groq API, .env file ,MediaRecorder API 
+- Languages used: Python, HTML, CSS, JavaScript
+- Frameworks used: Flask
+- Libraries used: Groq SDK, python-dotenv, gunicorn
+- Tools used: VS Code, Git, Render (hosting), Groq Cloud API
 
 ---
 
 ## Features
 
-List the key features of your project:
-- Feature 1: 🎤 Record audio from microphone
-- Feature 2: 📁 Upload audio files in multiple formats
-- Feature 3: 🔄 Automatic audio format conversion using FFmpeg + pydub
-- Feature 4: 🧬 Text analysis via Groq API
-- Feature 5: 📊 Half pie chart showing dominant feminine/masculine percentage
-- Feature 6: 🌟 Glowing, colorful dynamic visual feedback
+- 🎙️ **Live Audio Recording:** Record your voice directly in the browser with one click
+- 📁 **Audio File Upload:** Upload any audio file (webm, mp3, wav, etc.) for analysis
+- 🤖 **AI Transcription:** Uses Groq Whisper (whisper-large-v3) to convert speech to text
+- 📊 **Tone Analysis:** LLaMA 3 70B analyzes the transcribed text for feminine/masculine tone percentages
+- 🌗 **Glowing Half-Pie Chart:** Results displayed as a dynamic, animated visual with a neon aesthetic
 
 ---
 
@@ -55,14 +53,21 @@ List the key features of your project:
 
 #### Installation
 ```bash
-git clone https://github.com/aruni-maanil/tinker-hack.git
+git clone https://github.com/YOUR_USERNAME/tinker-hack.git
 cd tinker-hack
+pip install -r requirements.txt
+```
+
+Create a `.env` file in the root folder:
+```
+GROQ_API_KEY=your_groq_api_key_here
 ```
 
 #### Run
 ```bash
-py -m pip install flask groq python-dotenv SpeechRecognition pyaudio pydub
+python app.py
 ```
+Then open [http://127.0.0.1:5000](http://127.0.0.1:5000) in your browser.
 
 ---
 
@@ -70,271 +75,66 @@ py -m pip install flask groq python-dotenv SpeechRecognition pyaudio pydub
 
 ### For Software:
 
-#### Screenshots (Add at least 3)
+#### Screenshots
 
-![Screenshot1](Add screenshot 1 here with proper name)
-*Add caption explaining what this shows*
+![Homepage](Screenshot_2026-02-21_080549.png)
+*The XY Analyzer homepage — users can record audio or upload a file for analysis*
 
-![Screenshot2](Add screenshot 2 here with proper name)
-*Add caption explaining what this shows*
+![Recording](Screenshot_2026-02-21_080636.png)
+*Live recording state — the app shows "Recording... Speak now" while capturing audio*
 
-![Screenshot3](Add screenshot 3 here with proper name)
-*Add caption explaining what this shows*
+![Result](Screenshot_2026-02-21_080709.png)
+*Analysis result — "Voice Leaning: Masculine" displayed with an animated glowing half-pie chart*
 
 #### Diagrams
 
-**System Architecture:**
-
-![Architecture Diagram](docs/architecture.png)
-*Explain your system architecture - components, data flow, tech stack interaction*
-
 **Application Workflow:**
 
-![Workflow](docs/workflow.png)
-*Add caption explaining your workflow*
-
----
-
-
-
-#### Build Photos
-
-![Team](Add photo of your team here)
-
-![Components](Add photo of your components here)
-*List out all components shown*
-
-![Build](Add photos of build process here)
-*Explain the build steps*
-
-![Final](Add photo of final product here)
-*Explain the final build*
+```
+User (Record / Upload Audio)
+        ↓
+Flask Backend (/analyze_audio)
+        ↓
+Groq Whisper API (whisper-large-v3)
+  → Transcribes audio to text
+        ↓
+Groq LLM API (llama3-70b-8192)
+  → Analyzes tone → returns { feminine: X, masculine: Y }
+        ↓
+Frontend renders animated glowing half-pie chart
+```
 
 ---
 
 ## Additional Documentation
 
-### For Web Projects with Backend:
+### API Documentation
 
-#### API Documentation
+**Base URL:** `https://tinker-hack.onrender.com`
 
-**Base URL:** `https://api.yourproject.com`
+#### Endpoints
 
-##### Endpoints
+**GET /**
+- **Description:** Serves the main frontend HTML page
+- **Response:** `index.html`
 
-**GET /api/endpoint**
-- **Description:** [What it does]
-- **Parameters:**
-  - `param1` (string): [Description]
-  - `param2` (integer): [Description]
+**POST /analyze_audio**
+- **Description:** Accepts an audio file, transcribes it, and returns feminine/masculine tone percentages
+- **Request:** `multipart/form-data` with field `file` (audio file)
 - **Response:**
 ```json
 {
-  "status": "success",
-  "data": {}
+  "feminine": 65,
+  "masculine": 35
 }
 ```
-
-**POST /api/endpoint**
-- **Description:** [What it does]
-- **Request Body:**
+- **Error Response:**
 ```json
 {
-  "field1": "value1",
-  "field2": "value2"
+  "error": "Error description here",
+  "feminine": 50,
+  "masculine": 50
 }
-```
-- **Response:**
-```json
-{
-  "status": "success",
-  "message": "Operation completed"
-}
-```
-
-[Add more endpoints as needed...]
-
----
-
-### For Mobile Apps:
-
-#### App Flow Diagram
-
-![App Flow](docs/app-flow.png)
-*Explain the user flow through your application*
-
-#### Installation Guide
-
-**For Android (APK):**
-1. Download the APK from [Release Link]
-2. Enable "Install from Unknown Sources" in your device settings:
-   - Go to Settings > Security
-   - Enable "Unknown Sources"
-3. Open the downloaded APK file
-4. Follow the installation prompts
-5. Open the app and enjoy!
-
-**For iOS (IPA) - TestFlight:**
-1. Download TestFlight from the App Store
-2. Open this TestFlight link: [Your TestFlight Link]
-3. Click "Install" or "Accept"
-4. Wait for the app to install
-5. Open the app from your home screen
-
-**Building from Source:**
-```bash
-# For Android
-flutter build apk
-# or
-./gradlew assembleDebug
-
-# For iOS
-flutter build ios
-# or
-xcodebuild -workspace App.xcworkspace -scheme App -configuration Debug
-```
-
----
-
-### For Hardware Projects:
-
-#### Bill of Materials (BOM)
-
-| Component | Quantity | Specifications | Price | Link/Source |
-|-----------|----------|----------------|-------|-------------|
-| Arduino Uno | 1 | ATmega328P, 16MHz | ₹450 | [Link] |
-| LED | 5 | Red, 5mm, 20mA | ₹5 each | [Link] |
-| Resistor | 5 | 220Ω, 1/4W | ₹1 each | [Link] |
-| Breadboard | 1 | 830 points | ₹100 | [Link] |
-| Jumper Wires | 20 | Male-to-Male | ₹50 | [Link] |
-| [Add more...] | | | | |
-
-**Total Estimated Cost:** ₹[Amount]
-
-#### Assembly Instructions
-
-**Step 1: Prepare Components**
-1. Gather all components listed in the BOM
-2. Check component specifications
-3. Prepare your workspace
-![Step 1](images/assembly-step1.jpg)
-*Caption: All components laid out*
-
-**Step 2: Build the Power Supply**
-1. Connect the power rails on the breadboard
-2. Connect Arduino 5V to breadboard positive rail
-3. Connect Arduino GND to breadboard negative rail
-![Step 2](images/assembly-step2.jpg)
-*Caption: Power connections completed*
-
-**Step 3: Add Components**
-1. Place LEDs on breadboard
-2. Connect resistors in series with LEDs
-3. Connect LED cathodes to GND
-4. Connect LED anodes to Arduino digital pins (2-6)
-![Step 3](images/assembly-step3.jpg)
-*Caption: LED circuit assembled*
-
-**Step 4: [Continue for all steps...]**
-
-**Final Assembly:**
-![Final Build](images/final-build.jpg)
-*Caption: Completed project ready for testing*
-
----
-
-### For Scripts/CLI Tools:
-
-#### Command Reference
-
-**Basic Usage:**
-```bash
-python script.py [options] [arguments]
-```
-
-**Available Commands:**
-- `command1 [args]` - Description of what command1 does
-- `command2 [args]` - Description of what command2 does
-- `command3 [args]` - Description of what command3 does
-
-**Options:**
-- `-h, --help` - Show help message and exit
-- `-v, --verbose` - Enable verbose output
-- `-o, --output FILE` - Specify output file path
-- `-c, --config FILE` - Specify configuration file
-- `--version` - Show version information
-
-**Examples:**
-
-```bash
-# Example 1: Basic usage
-python script.py input.txt
-
-# Example 2: With verbose output
-python script.py -v input.txt
-
-# Example 3: Specify output file
-python script.py -o output.txt input.txt
-
-# Example 4: Using configuration
-python script.py -c config.json --verbose input.txt
-```
-
-#### Demo Output
-
-**Example 1: Basic Processing**
-
-**Input:**
-```
-This is a sample input file
-with multiple lines of text
-for demonstration purposes
-```
-
-**Command:**
-```bash
-python script.py sample.txt
-```
-
-**Output:**
-```
-Processing: sample.txt
-Lines processed: 3
-Characters counted: 86
-Status: Success
-Output saved to: output.txt
-```
-
-**Example 2: Advanced Usage**
-
-**Input:**
-```json
-{
-  "name": "test",
-  "value": 123
-}
-```
-
-**Command:**
-```bash
-python script.py -v --format json data.json
-```
-
-**Output:**
-```
-[VERBOSE] Loading configuration...
-[VERBOSE] Parsing JSON input...
-[VERBOSE] Processing data...
-{
-  "status": "success",
-  "processed": true,
-  "result": {
-    "name": "test",
-    "value": 123,
-    "timestamp": "2024-02-07T10:30:00"
-  }
-}
-[VERBOSE] Operation completed in 0.23s
 ```
 
 ---
@@ -342,59 +142,45 @@ python script.py -v --format json data.json
 ## Project Demo
 
 ### Video
-[Add your demo video link here - YouTube, Google Drive, etc.]
+*Demo video coming soon*
 
-*Explain what the video demonstrates - key features, user flow, technical highlights*
-
-### Additional Demos
-[Add any extra demo materials/links - Live site, APK download, online demo, etc.]
+### Live Site
+🔗 [https://tinker-hack.onrender.com/](https://tinker-hack.onrender.com/)
 
 ---
 
-## AI Tools Used (Optional - For Transparency Bonus)
+## AI Tools Used
 
-If you used AI tools during development, document them here for transparency:
+**Tool Used:** Claude (Anthropic)
 
-**Tool Used:** [e.g., GitHub Copilot, v0.dev, Cursor, ChatGPT, Claude]
-
-**Purpose:** [What you used it for]
-- Example: "Generated boilerplate React components"
-- Example: "Debugging assistance for async functions"
-- Example: "Code review and optimization suggestions"
+**Purpose:**
+- Rewrote the Flask backend to remove ffmpeg/pydub dependencies and replace with Groq Whisper
+- Debugging deployment issues on Render
+- Code optimization and cleanup
 
 **Key Prompts Used:**
-- "Create a REST API endpoint for user authentication"
-- "Debug this async function that's causing race conditions"
-- "Optimize this database query for better performance"
+- "Rewrite without ffmpeg and use minimal dependencies"
+- "Deploy your full Flask app completely free using Render"
 
-**Percentage of AI-generated code:** [Approximately X%]
+**Percentage of AI-generated code:** ~40%
 
 **Human Contributions:**
-- Architecture design and planning
-- Custom business logic implementation
+- Project concept and design
+- Frontend UI/UX (glowing half-pie chart, neon aesthetic)
 - Integration and testing
-- UI/UX design decisions
-
-*Note: Proper documentation of AI usage demonstrates transparency and earns bonus points in evaluation!*
+- Audio recording logic in the browser
 
 ---
 
 ## Team Contributions
 
-- [Name 1]: [Specific contributions - e.g., Frontend development, API integration, etc.]
-- [Name 2]: [Specific contributions - e.g., Backend development, Database design, etc.]
-- [Name 3]: [Specific contributions - e.g., UI/UX design, Testing, Documentation, etc.]
+- **Arunima Anil:** Full project — concept, frontend development, backend development, API integration, deployment, and documentation
 
 ---
 
 ## License
 
-This project is licensed under the [LICENSE_NAME] License - see the [LICENSE](LICENSE) file for details.
-
-**Common License Options:**
-- MIT License (Permissive, widely used)
-- Apache 2.0 (Permissive with patent grant)
-- GPL v3 (Copyleft, requires derivative works to be open source)
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
