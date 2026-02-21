@@ -1,7 +1,4 @@
-Flask
-flask-cors
-speechrecognition
-pyaudio
-pydub
-python-dotenv
+flask
 groq
+python-dotenv
+gunicorn
